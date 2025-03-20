@@ -15,10 +15,10 @@ function statement(invoice, plays) {
         volumeCredits += Math.max(perf.audience - 30, 0);
 
         // Crédito adicional por cada 5 asistentes a comedias
-        if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
+        if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
         // Agregar línea de detalle a la factura
-        result += `  ${play.name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`;
+        result += `  ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`;
         totalAmount += thisAmount;
     }
 
