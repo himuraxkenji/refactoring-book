@@ -8,10 +8,7 @@ function statement(invoice, plays) {
         totalAmount += amountFor(perf);
     }
 
-    let volumeCredits = 0;
-    for (let perf of invoice.performances) {
-        volumeCredits += volumeCreditsFor(perf)        
-    }
+    let volumeCredits = totalVolumeCredits();
 
     result += `Amount owed is ${usd(totalAmount)}\n`;
     result += `You earned ${volumeCredits} credits\n`;
@@ -46,7 +43,7 @@ function playFor(aPerformance) {
     return plays[aPerformance.playID];
 }
 
-function volumeCreditsFor(aPerformance){
+function volumeCreditsFor(aPerformance) {
     let result = 0;
     result += Math.max(aPerformance.audience - 30, 0);
     if ("comedy" === playFor(aPerformance).type) result += Math.floor(aPerformance.audience / 5);
@@ -58,5 +55,13 @@ function usd(aNumber) {
         {
             style: "currency", currency: "USD",
             minimumFractionDigits: 2
-        }).format(aNumber/100);
+        }).format(aNumber / 100);
+}
+
+function totalVolumeCredits() {
+    let volumeCredits = 0;
+    for (let perf of invoice.performances) {
+        volumeCredits += volumeCreditsFor(perf)
+    }
+    return volumeCredits
 }
