@@ -11,7 +11,12 @@ function statement(invoice, plays) {
 
   function enrichPerformance(aPerformance) {
     const result = Object.assign({}, aPerformance);
+    result.play = playFor(aPerformance)
     return result;
+  }
+
+  function playFor(aPerformance) {
+    return plays[aPerformance.playID];
   }
 }
 
@@ -52,9 +57,7 @@ function renderPlainText(data, plays) {
     if ("comedy" === playFor(aPerformance).type) result += Math.floor(aPerformance.audience / 5);
     return result;
   }
-  function playFor(aPerformance) {
-    return plays[aPerformance.playID];
-  }
+  
   function amountFor(aPerformance) {
     let result = 0;
     switch (playFor(aPerformance).type) {
