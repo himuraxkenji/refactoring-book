@@ -12,14 +12,12 @@ function renderPlainText(data) {
   result += `Amount owed is ${usd(data.totalAmount)}\n`;
   result += `You earned ${data.totalVolumeCredits} credits\n`;
   return result;
-
-
-
 }
 
 function htmlStatement(invoice, plays) {
   return renderHtml(createStatementData(invoice, plays));
 }
+  
 function renderHtml(data) {
   let result = `<h1>Statement for ${data.customer}</h1>\n`;
   result += "<table>\n";
